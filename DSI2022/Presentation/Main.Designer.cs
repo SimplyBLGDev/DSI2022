@@ -1,5 +1,5 @@
 ﻿namespace DSI2022 {
-	partial class Form1 {
+	partial class Main {
 		/// <summary>
 		///  Required designer variable.
 		/// </summary>
