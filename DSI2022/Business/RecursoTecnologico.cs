@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace DSI2022.Business {
 	public class RecursoTecnologico {
-		public int id;
-		public DateTime fechaAlta;
-		public string marca;
-		public string modelo;
-
-		public RecursoTecnologico(int id, DateTime fechaAlta, string marca, string modelo) {
-			this.id = id;
-			this.fechaAlta = fechaAlta;
-			this.marca = marca;
-			this.modelo = modelo;
-		}
+		private int id;
+		private DateTime fechaAlta;
+		private TipoRecursoTecnologico tipo;
+		private ValorCaracteristicaRT[] valoresCaracteristicas;
+		private List<HistorialEstado> historialEstados;
+		private ModeloRT modelo;
+		private Turno[] turnos;
 	}
 }
+
