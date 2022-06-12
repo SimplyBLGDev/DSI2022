@@ -36,7 +36,9 @@ namespace DSI2022.Persistence {
 
 			T[] values = JsonConvert.DeserializeObject<T[]>(contents);
 
-			AddRange(values);
+			if (values != null) {
+				AddRange(values);
+			}
 		}
 	}
 }

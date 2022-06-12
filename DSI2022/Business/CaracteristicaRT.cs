@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DSI2022.Business {
-	internal class CaracteristicaRT {
+	public class CaracteristicaRT {
 		public string nombre;
 	}
 }

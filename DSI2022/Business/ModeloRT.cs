@@ -7,5 +7,14 @@ using System.Threading.Tasks;
 namespace DSI2022.Business {
 	internal class ModeloRT {
 		private string nombre;
+		private MarcaRT marca;
+
+		internal string GetMarca() {
+			return marca.GetNombre();
+		}
+
+		internal string GetNombre() {
+			return nombre;
+		}
 	}
 }

@@ -5,8 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DSI2022.Business {
-	internal class TipoRecursoTecnologico {
-		public string nombre;
-		public CaracteristicaRT[] caracteristicas;
+	public class TipoRecursoTecnologico {
+		private string nombre;
+		private string descripcion;
+		public string Nombre { get => nombre; set => nombre = value; }
+		public string Descripcion { get => descripcion; set => descripcion = value; }
+
+		public TipoRecursoTecnologico(string nombre, string descripcion) {
+			this.Nombre = nombre;
+			this.descripcion = descripcion;
+		}
+
+		internal string GetNombre() {
+			return Nombre;
+		}
 	}
 }

@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace DSI2022.Business {
 	internal class HistorialEstado {
-		public Estado estado;
+		private Estado estado;
+
+		public Estado Estado { get => estado; set => estado = value; }
+
+		internal bool EsActivo() {
+			return Estado.EsActivo();
+		}
+
+		internal string GetEstado() {
+			return estado.GetNombre();
+		}
 	}
 }

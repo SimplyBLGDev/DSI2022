@@ -13,6 +13,34 @@ namespace DSI2022.Business {
 		private List<HistorialEstado> historialEstados;
 		private ModeloRT modelo;
 		private Turno[] turnos;
+
+		internal bool EsDeTipo(TipoRecursoTecnologico tipo) {
+			return this.tipo == tipo;
+		}
+
+		internal bool EsActivo() {
+			return GetHistorialEstadoActual().EsActivo();
+		}
+
+		private HistorialEstado GetHistorialEstadoActual() {
+			return historialEstados.Last();
+		}
+
+		internal string GetNumero() {
+			return id.ToString();
+		}
+
+		internal string GetMarca() {
+			return modelo.GetMarca();
+		}
+
+		internal string GetModelo() {
+			return modelo.GetNombre();
+		}
+
+		internal string GetEstado() {
+			return GetHistorialEstadoActual().GetEstado();
+		}
 	}
 }
 
