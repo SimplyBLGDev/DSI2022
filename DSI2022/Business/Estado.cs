@@ -5,8 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DSI2022.Business {
-	internal class Estado {
+	public class Estado {
 		private string nombre;
+
+		public Estado(string nombre) {
+			this.nombre = nombre;
+		}
 
 		public string Nombre { get => nombre; set => nombre = value; }
 

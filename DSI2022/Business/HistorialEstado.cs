@@ -5,8 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DSI2022.Business {
-	internal class HistorialEstado {
+	public class HistorialEstado {
 		private Estado estado;
+
+		public HistorialEstado(Estado estado) {
+			this.estado = estado;
+		}
 
 		public Estado Estado { get => estado; set => estado = value; }
 

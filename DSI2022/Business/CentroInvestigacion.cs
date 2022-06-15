@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DSI2022.Business {
-	internal class CentroInvestigacion {
+	public class CentroInvestigacion {
 		private string nombre;
 		private string siglas;
 		private string direccion;
@@ -22,6 +22,27 @@ namespace DSI2022.Business {
 		private RecursoTecnologico[] recursosTecnologicos;
 		private AsignacionCientificoDelCI[] cientificos;
 
+		public CentroInvestigacion(string nombre, string siglas, string direccion, string edificio, string piso,
+			string coordenadas, string eMail, string numeroResolucionCreacion, DateTime fechaResolucionCreacion,
+			int reglamento, DateTime fechaAlta, DateTime fechaBaja, string motivoBaja, RecursoTecnologico[] recursosTecnologicos, AsignacionCientificoDelCI[] cientificos) {
+
+			this.nombre = nombre;
+			this.siglas = siglas;
+			this.direccion = direccion;
+			this.edificio = edificio;
+			this.piso = piso;
+			this.coordenadas = coordenadas;
+			this.eMail = eMail;
+			this.numeroResolucionCreacion = numeroResolucionCreacion;
+			this.fechaResolucionCreacion = fechaResolucionCreacion;
+			this.reglamento = reglamento;
+			this.fechaAlta = fechaAlta;
+			this.fechaBaja = fechaBaja;
+			this.motivoBaja = motivoBaja;
+			this.recursosTecnologicos = recursosTecnologicos;
+			this.cientificos = cientificos;
+		}
+
 		public string Nombre { get => nombre; set => nombre = value; }
 		public string Siglas { get => siglas; set => siglas = value; }
 		public string Direccion { get => direccion; set => direccion = value; }
@@ -36,7 +57,7 @@ namespace DSI2022.Business {
 		public DateTime FechaBaja { get => fechaBaja; set => fechaBaja = value; }
 		public string MotivoBaja { get => motivoBaja; set => motivoBaja = value; }
 		public RecursoTecnologico[] RecursosTecnologicos { get => recursosTecnologicos; set => recursosTecnologicos = value; }
-		internal AsignacionCientificoDelCI[] Cientificos { get => cientificos; set => cientificos = value; }
+		public AsignacionCientificoDelCI[] Cientificos { get => cientificos; set => cientificos = value; }
 
 		internal RecursoTecnologico[] BuscarRTDeTipo(TipoRecursoTecnologico tipo) {
 			List<RecursoTecnologico> validos = new List<RecursoTecnologico>();
@@ -48,6 +69,26 @@ namespace DSI2022.Business {
 			}
 
 			return validos.ToArray();
+		}
+
+		internal bool ContieneRecurso(RecursoTecnologico recurso) {
+			foreach (RecursoTecnologico rt in recursosTecnologicos) {
+				if (rt.EsRecurso(recurso)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		internal bool TrabajaCientifico(PersonalCientifico logeado) {
+			foreach (AsignacionCientificoDelCI asignacion in cientificos) {
+				if (asignacion.EsCientifico(logeado)) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		internal string GetNombre() {

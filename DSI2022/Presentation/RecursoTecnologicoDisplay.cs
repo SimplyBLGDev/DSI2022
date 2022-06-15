@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSI2022.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,14 @@ namespace DSI2022.Presentation {
 		public string marca;
 		public string modelo;
 		public string estado;
+		public RecursoTecnologico from;
 
-		public RecursoTecnologicoDisplay(string numero, string marca, string modelo, string estado) {
+		public RecursoTecnologicoDisplay(RecursoTecnologico from, string numero, string marca, string modelo, string estado) {
 			this.numero = numero;
 			this.marca = marca;
 			this.modelo = modelo;
 			this.estado = estado;
+			this.from = from;
 		}
 	}
 }

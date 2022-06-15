@@ -1,10 +1,6 @@
 ﻿using DSI2022.Persistence;
 using DSI2022.Presentation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DSI2022.Security;
 
 namespace DSI2022.Business {
 	public class GestorRegistrarReservaTurno {
@@ -14,6 +10,7 @@ namespace DSI2022.Business {
 
 		public GestorRegistrarReservaTurno(PantallaReservarTurno pantalla) {
 			tiposRecursoTecnologico = Database.FetchTiposRT();
+			centrosInvestigacion = Database.FetchCentrosInvestigacion();
 			this.pantalla = pantalla;
 		}
 
@@ -41,7 +38,7 @@ namespace DSI2022.Business {
 		private CentroInvestigacionDisplay GenerarCIDisplay(CentroInvestigacion centroInvestigacion, RecursoTecnologico[] rTSinBaja) {
 			string nombre = centroInvestigacion.GetNombre();
 			RecursoTecnologicoDisplay[] rTDisplay = GetRTDisplay(rTSinBaja);
-			CentroInvestigacionDisplay cIDisplay = new CentroInvestigacionDisplay(nombre, rTDisplay);
+			CentroInvestigacionDisplay cIDisplay = new CentroInvestigacionDisplay(centroInvestigacion, nombre, rTDisplay);
 
 			return cIDisplay;
 		}
@@ -51,6 +48,7 @@ namespace DSI2022.Business {
 
 			foreach (RecursoTecnologico seleccionado in rTSinBaja) {
 				RecursoTecnologicoDisplay rTDisplay = new RecursoTecnologicoDisplay(
+						from: seleccionado,
 						numero: seleccionado.GetNumero(),
 						marca: seleccionado.GetMarca(),
 						modelo: seleccionado.GetModelo(),
@@ -68,6 +66,18 @@ namespace DSI2022.Business {
 			encontrados.AddRange(centroInvestigacion.BuscarRTDeTipo(tipo));
 
 			return encontrados.ToArray();
+		}
+
+		internal void SeleccionarRecursoTecnologico(CentroInvestigacion cISeleccionado, RecursoTecnologico seleccionado) {
+			if (VerificarPerteneceAlLogeado(cISeleccionado, seleccionado)) {
+
+			}
+		}
+
+		private bool VerificarPerteneceAlLogeado(CentroInvestigacion centroInvestigacion, RecursoTecnologico recurso) {
+			PersonalCientifico logeado = SessionManager.GetCientifico();
+
+			return centroInvestigacion.TrabajaCientifico(logeado) && centroInvestigacion.ContieneRecurso(recurso);
 		}
 	}
 }

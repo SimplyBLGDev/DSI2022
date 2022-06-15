@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DSI2022.Business;
 
 namespace DSI2022.Presentation {
 	public class CentroInvestigacionDisplay {
+		public CentroInvestigacion from;
 		public string nombre;
 		public RecursoTecnologicoDisplay[] recursos;
 
-		public CentroInvestigacionDisplay(string nombre, RecursoTecnologicoDisplay[] recursos) {
+		public CentroInvestigacionDisplay(CentroInvestigacion from, string nombre, RecursoTecnologicoDisplay[] recursos) {
+			this.from = from;
 			this.nombre = nombre;
 			this.recursos = recursos;
 		}

@@ -14,8 +14,26 @@ namespace DSI2022.Business {
 		private ModeloRT modelo;
 		private Turno[] turnos;
 
+		public int Id { get => id; set => id = value; }
+		public DateTime FechaAlta { get => fechaAlta; set => fechaAlta = value; }
+		public TipoRecursoTecnologico Tipo { get => tipo; set => tipo = value; }
+		public ValorCaracteristicaRT[] ValoresCaracteristicas { get => valoresCaracteristicas; set => valoresCaracteristicas = value; }
+		public List<HistorialEstado> HistorialEstados { get => historialEstados; set => historialEstados = value; }
+		public ModeloRT Modelo { get => modelo; set => modelo = value; }
+		public Turno[] Turnos { get => turnos; set => turnos = value; }
+
+		public RecursoTecnologico(int id, DateTime fechaAlta, TipoRecursoTecnologico tipo, ValorCaracteristicaRT[] valoresCaracteristicas, List<HistorialEstado> historialEstados, ModeloRT modelo, Turno[] turnos) {
+			this.id = id;
+			this.fechaAlta = fechaAlta;
+			this.tipo = tipo;
+			this.valoresCaracteristicas = valoresCaracteristicas;
+			this.historialEstados = historialEstados;
+			this.modelo = modelo;
+			this.turnos = turnos;
+		}
+
 		internal bool EsDeTipo(TipoRecursoTecnologico tipo) {
-			return this.tipo == tipo;
+			return this.tipo.GetNombre() == tipo.GetNombre();
 		}
 
 		internal bool EsActivo() {
@@ -40,6 +58,10 @@ namespace DSI2022.Business {
 
 		internal string GetEstado() {
 			return GetHistorialEstadoActual().GetEstado();
+		}
+
+		internal bool EsRecurso(RecursoTecnologico recurso) {
+			return recurso == this;
 		}
 	}
 }
