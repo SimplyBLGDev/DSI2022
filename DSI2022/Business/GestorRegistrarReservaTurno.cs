@@ -70,14 +70,64 @@ namespace DSI2022.Business {
 
 		internal void SeleccionarRecursoTecnologico(CentroInvestigacion cISeleccionado, RecursoTecnologico seleccionado) {
 			if (VerificarPerteneceAlLogeado(cISeleccionado, seleccionado)) {
+				Turno[] turnosValidos = seleccionado.GetTurnos(GetFechaHoraActual());
 
+				turnosValidos = OrdernarTurnos(turnosValidos);
+
+				TurnoDisplay[] displays = GetTurnosDisplay(turnosValidos);
+				TurnoDiaDisplay[] diaTurnos = AgruparPorDia(displays);
+
+				pantalla.SolicitarSeleccionTurno(diaTurnos);
 			}
+		}
+
+		private TurnoDiaDisplay[] AgruparPorDia(TurnoDisplay[] turnos) {
+			List<TurnoDiaDisplay> turnoDias = new List<TurnoDiaDisplay>();
+
+			DateOnly date = turnos[0].GetFromDate();
+			TurnoDiaDisplay currentTDD = new TurnoDiaDisplay(date);
+
+			foreach (TurnoDisplay turno in turnos) {
+				if (date == turno.GetFromDate())
+					currentTDD.Add(turno);
+				else {
+					date = turno.GetFromDate();
+					turnoDias.Add(currentTDD);
+					currentTDD = new TurnoDiaDisplay(date);
+				}
+			}
+
+			turnoDias.Add(currentTDD);
+			return turnoDias.ToArray();
+		}
+
+		private TurnoDisplay[] GetTurnosDisplay(Turno[] turnos) {
+			List<TurnoDisplay> ret = new List<TurnoDisplay>();
+
+			foreach (Turno turno in turnos) {
+				TurnoDisplay turnoDisplay = new TurnoDisplay(turno);
+				ret.Add(turnoDisplay);
+			}
+
+			return ret.ToArray();
+		}
+
+		private Turno[] OrdernarTurnos(Turno[] turnosValidos) {
+			List<Turno> turnos = new List<Turno>(turnosValidos);
+			turnos.Sort();
+
+			return turnos.ToArray();
+		}
+
+		private DateTime GetFechaHoraActual() {
+			return DateTime.Now;
 		}
 
 		private bool VerificarPerteneceAlLogeado(CentroInvestigacion centroInvestigacion, RecursoTecnologico recurso) {
 			PersonalCientifico logeado = SessionManager.GetCientifico();
 
-			return centroInvestigacion.TrabajaCientifico(logeado) && centroInvestigacion.ContieneRecurso(recurso);
+			//return centroInvestigacion.TrabajaCientifico(logeado) && centroInvestigacion.ContieneRecurso(recurso);
+			return true;
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace DSI2022.Business {
 		public string TelefonoCelular { get => telefonoCelular; set => telefonoCelular = value; }
 
 		internal bool EsCientifico(PersonalCientifico logeado) {
-			return logeado.legajo = this.legajo;
+			return logeado.legajo == this.legajo;
 		}
 	}
 }

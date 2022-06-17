@@ -63,6 +63,18 @@ namespace DSI2022.Business {
 		internal bool EsRecurso(RecursoTecnologico recurso) {
 			return recurso == this;
 		}
+
+		internal Turno[] GetTurnos(DateTime desde) {
+			List<Turno> turnosValidos = new List<Turno>();
+			
+			foreach (Turno turno in turnos) {
+				if (turno.EsValidoEn(desde)) {
+					turnosValidos.Add(turno);
+				}
+			}
+
+			return turnosValidos.ToArray();
+		}
 	}
 }
 

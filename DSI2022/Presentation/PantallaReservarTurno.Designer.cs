@@ -23,8 +23,8 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("CI 1", System.Windows.Forms.HorizontalAlignment.Left);
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("RT 1");
+			System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("CI 1", System.Windows.Forms.HorizontalAlignment.Left);
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("RT 1");
 			this.cmbTipoRT = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnSeleccionarTipoRecursoTecnologico = new System.Windows.Forms.Button();
@@ -34,6 +34,12 @@
 			this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
 			this.btnSeleccionarRT = new System.Windows.Forms.Button();
+			this.flpCalendario = new System.Windows.Forms.FlowLayoutPanel();
+			this.btnDefaultCalendarButton = new System.Windows.Forms.Button();
+			this.button8 = new System.Windows.Forms.Button();
+			this.lblCalendarMonth = new System.Windows.Forms.Label();
+			this.lsvTurnos = new System.Windows.Forms.ListView();
+			this.btnCancelar = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// cmbTipoRT
@@ -42,9 +48,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.cmbTipoRT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.cmbTipoRT.FormattingEnabled = true;
-			this.cmbTipoRT.Location = new System.Drawing.Point(172, 12);
+			this.cmbTipoRT.Location = new System.Drawing.Point(173, 12);
 			this.cmbTipoRT.Name = "cmbTipoRT";
-			this.cmbTipoRT.Size = new System.Drawing.Size(283, 23);
+			this.cmbTipoRT.Size = new System.Drawing.Size(186, 23);
 			this.cmbTipoRT.TabIndex = 0;
 			this.cmbTipoRT.SelectedIndexChanged += new System.EventHandler(this.cmbTipoRT_SelectedIndexChanged);
 			// 
@@ -63,9 +69,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnSeleccionarTipoRecursoTecnologico.Enabled = false;
 			this.btnSeleccionarTipoRecursoTecnologico.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnSeleccionarTipoRecursoTecnologico.Location = new System.Drawing.Point(12, 41);
+			this.btnSeleccionarTipoRecursoTecnologico.Location = new System.Drawing.Point(13, 41);
 			this.btnSeleccionarTipoRecursoTecnologico.Name = "btnSeleccionarTipoRecursoTecnologico";
-			this.btnSeleccionarTipoRecursoTecnologico.Size = new System.Drawing.Size(443, 42);
+			this.btnSeleccionarTipoRecursoTecnologico.Size = new System.Drawing.Size(346, 42);
 			this.btnSeleccionarTipoRecursoTecnologico.TabIndex = 2;
 			this.btnSeleccionarTipoRecursoTecnologico.Text = "Seleccionar";
 			this.btnSeleccionarTipoRecursoTecnologico.UseVisualStyleBackColor = true;
@@ -84,18 +90,18 @@
             this.columnHeader4});
 			this.lsvRecursosTecnologicos.Enabled = false;
 			this.lsvRecursosTecnologicos.FullRowSelect = true;
-			listViewGroup1.Header = "CI 1";
-			listViewGroup1.Name = "listViewGroup1";
+			listViewGroup2.Header = "CI 1";
+			listViewGroup2.Name = "listViewGroup1";
 			this.lsvRecursosTecnologicos.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
+            listViewGroup2});
 			this.lsvRecursosTecnologicos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-			listViewItem1.Group = listViewGroup1;
+			listViewItem2.Group = listViewGroup2;
 			this.lsvRecursosTecnologicos.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-			this.lsvRecursosTecnologicos.Location = new System.Drawing.Point(12, 89);
+            listViewItem2});
+			this.lsvRecursosTecnologicos.Location = new System.Drawing.Point(13, 89);
 			this.lsvRecursosTecnologicos.MultiSelect = false;
 			this.lsvRecursosTecnologicos.Name = "lsvRecursosTecnologicos";
-			this.lsvRecursosTecnologicos.Size = new System.Drawing.Size(443, 387);
+			this.lsvRecursosTecnologicos.Size = new System.Drawing.Size(346, 387);
 			this.lsvRecursosTecnologicos.TabIndex = 3;
 			this.lsvRecursosTecnologicos.UseCompatibleStateImageBehavior = false;
 			this.lsvRecursosTecnologicos.View = System.Windows.Forms.View.Details;
@@ -127,20 +133,90 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnSeleccionarRT.Enabled = false;
 			this.btnSeleccionarRT.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnSeleccionarRT.Location = new System.Drawing.Point(12, 482);
+			this.btnSeleccionarRT.Location = new System.Drawing.Point(13, 482);
 			this.btnSeleccionarRT.Name = "btnSeleccionarRT";
-			this.btnSeleccionarRT.Size = new System.Drawing.Size(443, 42);
+			this.btnSeleccionarRT.Size = new System.Drawing.Size(347, 42);
 			this.btnSeleccionarRT.TabIndex = 4;
 			this.btnSeleccionarRT.Text = "Seleccionar";
 			this.btnSeleccionarRT.UseVisualStyleBackColor = true;
 			this.btnSeleccionarRT.Click += new System.EventHandler(this.btnSeleccionarRT_Click);
+			// 
+			// flpCalendario
+			// 
+			this.flpCalendario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.flpCalendario.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.flpCalendario.Location = new System.Drawing.Point(366, 41);
+			this.flpCalendario.Name = "flpCalendario";
+			this.flpCalendario.Size = new System.Drawing.Size(224, 130);
+			this.flpCalendario.TabIndex = 6;
+			// 
+			// btnDefaultCalendarButton
+			// 
+			this.btnDefaultCalendarButton.Location = new System.Drawing.Point(562, 175);
+			this.btnDefaultCalendarButton.Margin = new System.Windows.Forms.Padding(1);
+			this.btnDefaultCalendarButton.Name = "btnDefaultCalendarButton";
+			this.btnDefaultCalendarButton.Size = new System.Drawing.Size(29, 23);
+			this.btnDefaultCalendarButton.TabIndex = 0;
+			this.btnDefaultCalendarButton.Text = "00";
+			this.btnDefaultCalendarButton.UseVisualStyleBackColor = true;
+			this.btnDefaultCalendarButton.Visible = false;
+			// 
+			// button8
+			// 
+			this.button8.Location = new System.Drawing.Point(366, 434);
+			this.button8.Name = "button8";
+			this.button8.Size = new System.Drawing.Size(225, 42);
+			this.button8.TabIndex = 7;
+			this.button8.Text = "Reservar Turno";
+			this.button8.UseVisualStyleBackColor = true;
+			// 
+			// lblCalendarMonth
+			// 
+			this.lblCalendarMonth.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.lblCalendarMonth.Location = new System.Drawing.Point(367, 12);
+			this.lblCalendarMonth.Name = "lblCalendarMonth";
+			this.lblCalendarMonth.Size = new System.Drawing.Size(222, 23);
+			this.lblCalendarMonth.TabIndex = 1;
+			this.lblCalendarMonth.Text = "Junio 2022";
+			this.lblCalendarMonth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// lsvTurnos
+			// 
+			this.lsvTurnos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lsvTurnos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lsvTurnos.FullRowSelect = true;
+			this.lsvTurnos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lsvTurnos.Location = new System.Drawing.Point(367, 177);
+			this.lsvTurnos.Name = "lsvTurnos";
+			this.lsvTurnos.Size = new System.Drawing.Size(222, 251);
+			this.lsvTurnos.TabIndex = 8;
+			this.lsvTurnos.UseCompatibleStateImageBehavior = false;
+			this.lsvTurnos.View = System.Windows.Forms.View.List;
+			this.lsvTurnos.SelectedIndexChanged += new System.EventHandler(this.lsvTurnos_SelectedIndexChanged);
+			// 
+			// btnCancelar
+			// 
+			this.btnCancelar.Location = new System.Drawing.Point(367, 482);
+			this.btnCancelar.Name = "btnCancelar";
+			this.btnCancelar.Size = new System.Drawing.Size(222, 42);
+			this.btnCancelar.TabIndex = 9;
+			this.btnCancelar.Text = "Cancelar";
+			this.btnCancelar.UseVisualStyleBackColor = true;
+			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
 			// 
 			// PantallaReservarTurno
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLight;
-			this.ClientSize = new System.Drawing.Size(467, 536);
+			this.ClientSize = new System.Drawing.Size(601, 536);
+			this.Controls.Add(this.btnCancelar);
+			this.Controls.Add(this.lsvTurnos);
+			this.Controls.Add(this.btnDefaultCalendarButton);
+			this.Controls.Add(this.button8);
+			this.Controls.Add(this.lblCalendarMonth);
+			this.Controls.Add(this.flpCalendario);
 			this.Controls.Add(this.btnSeleccionarRT);
 			this.Controls.Add(this.lsvRecursosTecnologicos);
 			this.Controls.Add(this.btnSeleccionarTipoRecursoTecnologico);
@@ -163,5 +239,11 @@
 		private ColumnHeader columnHeader3;
 		private ColumnHeader columnHeader4;
 		private Button btnSeleccionarRT;
+		private FlowLayoutPanel flpCalendario;
+		private Button btnDefaultCalendarButton;
+		private Button button8;
+		private Label lblCalendarMonth;
+		private ListView lsvTurnos;
+		private Button btnCancelar;
 	}
 }

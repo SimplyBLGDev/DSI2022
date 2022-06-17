@@ -3,6 +3,8 @@
 namespace DSI2022.Presentation {
 	public partial class PantallaReservarTurno : Form {
 		private Dictionary<string, Color> COLORES_ESTADOS = new Dictionary<string, Color>();
+		private Dictionary<TurnoDiaDisplay.TurnoDiaEstado, Color> COLORES_TURNODIA_ESTADO = new Dictionary<TurnoDiaDisplay.TurnoDiaEstado, Color>();
+		private Dictionary<TurnoDisplay.Estado, Color> COLORES_ESTADO_TURNO = new Dictionary<TurnoDisplay.Estado, Color>();
 		GestorRegistrarReservaTurno gestor;
 
 		public PantallaReservarTurno() {
@@ -10,7 +12,14 @@ namespace DSI2022.Presentation {
 			COLORES_ESTADOS.Add("Disponible", Color.Blue);
 			COLORES_ESTADOS.Add("En Mantenimiento", Color.Green);
 			COLORES_ESTADOS.Add("Mantenimiento Correctivo", Color.Gray);
-			
+
+			COLORES_TURNODIA_ESTADO.Add(TurnoDiaDisplay.TurnoDiaEstado.LIBRE, Color.Blue);
+			COLORES_TURNODIA_ESTADO.Add(TurnoDiaDisplay.TurnoDiaEstado.OCUPADO, Color.Red);
+
+			COLORES_ESTADO_TURNO.Add(TurnoDisplay.Estado.DISPONIBLE, Color.Blue);
+			COLORES_ESTADO_TURNO.Add(TurnoDisplay.Estado.PENDIENTE_CONFIRMACION, Color.Gray);
+			COLORES_ESTADO_TURNO.Add(TurnoDisplay.Estado.RESERVADO, Color.Red);
+
 			HabilitarPantalla();
 		}
 
@@ -79,6 +88,10 @@ namespace DSI2022.Presentation {
 			return newItem;
 		}
 
+		internal void SolicitarSeleccionTurno(TurnoDiaDisplay[] diaTurnos) {
+			GenerateCalendar(diaTurnos);
+		}
+
 		private void btnSeleccionarTipoRecursoTecnologico_Click(object sender, EventArgs e) {
 			ComboBoxItem seleccionado = cmbTipoRT.SelectedItem as ComboBoxItem;
 			gestor.SeleccionarTipoRT(seleccionado.value as TipoRecursoTecnologico);
@@ -92,6 +105,49 @@ namespace DSI2022.Presentation {
 			CentroInvestigacion cISeleccionado = lsvRecursosTecnologicos.SelectedItems[0].Group.Tag as CentroInvestigacion;
 			RecursoTecnologico seleccionado = lsvRecursosTecnologicos.SelectedItems[0].Tag as RecursoTecnologico;
 			gestor.SeleccionarRecursoTecnologico(cISeleccionado, seleccionado);
+		}
+
+		private void GenerateCalendar(TurnoDiaDisplay[] dias) {
+			foreach (TurnoDiaDisplay dia in dias) {
+				Button newButton = new Button();
+
+				newButton.Text = dia.GetNumeroDia();
+				newButton.Margin = btnDefaultCalendarButton.Margin;
+				newButton.Size = btnDefaultCalendarButton.Size;
+				newButton.ForeColor = COLORES_TURNODIA_ESTADO[dia.CalcularDisponibilidad()];
+				newButton.Tag = dia;
+				newButton.Click += BtnTurno_Clicked;
+
+				flpCalendario.Controls.Add(newButton);
+			}
+		}
+
+		private void BtnTurno_Clicked(object sender, EventArgs e) {
+			Button btn = sender as Button;
+
+			if (btn != null && btn.Tag != null) {
+				PopularListaTurnos(btn.Tag as TurnoDiaDisplay);
+			}
+		}
+
+		private void PopularListaTurnos(TurnoDiaDisplay dia) {
+			lsvTurnos.Items.Clear();
+
+			foreach (TurnoDisplay turno in dia) {
+				ListViewItem newItem = new ListViewItem(turno.ToString());
+				newItem.Tag = turno;
+				lsvTurnos.Items.Add(newItem);
+			}
+		}
+
+		private void lsvTurnos_SelectedIndexChanged(object sender, EventArgs e) {
+
+		}
+
+		private void btnCancelar_Click(object sender, EventArgs e) {
+			if (MessageBox.Show("¿Cancelar reserva de turno?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
+				Close();
+			}
 		}
 	}
 }
