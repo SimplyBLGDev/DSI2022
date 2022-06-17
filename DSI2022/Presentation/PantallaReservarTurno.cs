@@ -141,6 +141,7 @@ namespace DSI2022.Presentation {
 
 			foreach (TurnoDisplay turno in dia) {
 				ListViewItem newItem = new ListViewItem(turno.ToString());
+				newItem.ForeColor = COLORES_ESTADO_TURNO[turno.GetEstado()];
 				newItem.Tag = turno;
 				lsvTurnos.Items.Add(newItem);
 			}

@@ -24,6 +24,10 @@ namespace DSI2022.Presentation {
 			}
 		}
 
+		internal Estado GetEstado() {
+			return estado;
+		}
+
 		internal bool EstaDisponible() {
 			return estado == Estado.DISPONIBLE;
 		}

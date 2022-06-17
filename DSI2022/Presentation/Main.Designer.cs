@@ -43,7 +43,7 @@
 			this.ClientSize = new System.Drawing.Size(353, 200);
 			this.Controls.Add(this.btnReservarTurno);
 			this.Name = "Main";
-			this.Text = "Form1";
+			this.Text = "Aproba3";
 			this.ResumeLayout(false);
 
 		}

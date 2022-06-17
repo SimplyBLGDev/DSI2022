@@ -226,7 +226,7 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.cmbTipoRT);
 			this.Name = "PantallaReservarTurno";
-			this.Text = "PantallaReservarTurno";
+			this.Text = "Reservar Turno";
 			this.ResumeLayout(false);
 
 		}
