@@ -32,6 +32,10 @@ namespace DSI2022.Business {
 			this.turnos = turnos;
 		}
 
+		internal string GetDatos() {
+			return "modelo: " + modelo.GetNombre() + ", marca: " + modelo.GetMarca();
+		}
+
 		internal bool EsDeTipo(TipoRecursoTecnologico tipo) {
 			return this.tipo.GetNombre() == tipo.GetNombre();
 		}

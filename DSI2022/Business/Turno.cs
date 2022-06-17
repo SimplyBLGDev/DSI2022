@@ -47,5 +47,13 @@ namespace DSI2022.Business {
 		internal bool EsValidoEn(DateTime en) {
 			return fechaInicio > en;
 		}
+
+		internal void Reservar(Estado reservado) {
+			SetEstado(reservado);
+		}
+
+		private void SetEstado(Estado reservado) {
+			historialEstados.Add(new HistorialEstado(reservado));
+		}
 	}
 }

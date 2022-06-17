@@ -108,6 +108,8 @@ namespace DSI2022.Presentation {
 		}
 
 		private void GenerateCalendar(TurnoDiaDisplay[] dias) {
+			ClearCalendar();
+
 			foreach (TurnoDiaDisplay dia in dias) {
 				Button newButton = new Button();
 
@@ -120,6 +122,10 @@ namespace DSI2022.Presentation {
 
 				flpCalendario.Controls.Add(newButton);
 			}
+		}
+
+		private void ClearCalendar() {
+			flpCalendario.Controls.Clear();
 		}
 
 		private void BtnTurno_Clicked(object sender, EventArgs e) {
@@ -141,13 +147,39 @@ namespace DSI2022.Presentation {
 		}
 
 		private void lsvTurnos_SelectedIndexChanged(object sender, EventArgs e) {
+			if (lsvTurnos.SelectedItems.Count != 1) {
+				btnReservarTurno.Enabled = false;
+				return;
+			}
 
+			TurnoDisplay turno = lsvTurnos.SelectedItems[0].Tag as TurnoDisplay;
+			btnReservarTurno.Enabled = turno.EstaDisponible();
 		}
 
 		private void btnCancelar_Click(object sender, EventArgs e) {
 			if (MessageBox.Show("¿Cancelar reserva de turno?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
 				Close();
 			}
+		}
+
+		private void btnReservarTurno_Click(object sender, EventArgs e) {
+			TurnoDisplay td = lsvTurnos.SelectedItems[0].Tag as TurnoDisplay;
+
+			if (MostrarConfirmacion(td) == DialogResult.Yes) {
+				if (MessageBox.Show("Sera informado por eMail, desea cambiar el metodo de notificacion?", "Notificacion.", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					NotificacionSettings notificacionSettings = new NotificacionSettings();
+					notificacionSettings.ShowDialog();
+				}
+
+				gestor.ReservarTurno(td.GetTurno());
+				MessageBox.Show("Reserva Realizada");
+			}
+		}
+
+		private DialogResult MostrarConfirmacion(TurnoDisplay? td) {
+			return MessageBox.Show(
+				"Esta reservando un turno para el " + td.GetFullDateString() + " en el recurso tecnologico " + td.GetDatosRT()
+				+ "\nDesea reservar el turno?", "Reserva", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 		}
 	}
 }

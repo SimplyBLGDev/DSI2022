@@ -28,7 +28,7 @@ namespace DSI2022 {
 
 		private void btnReservarTurno_Click(object sender, EventArgs e) {
 			PantallaReservarTurno pantallaReservarTurno = new PantallaReservarTurno();
-			pantallaReservarTurno.Show();
+			pantallaReservarTurno.ShowDialog();
 		}
 	}
 }

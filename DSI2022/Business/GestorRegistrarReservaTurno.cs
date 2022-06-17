@@ -7,8 +7,10 @@ namespace DSI2022.Business {
 		private PantallaReservarTurno pantalla;
 		private TipoRecursoTecnologico[] tiposRecursoTecnologico;
 		private CentroInvestigacion[] centrosInvestigacion;
+		private Estado[] estados;
 
 		public GestorRegistrarReservaTurno(PantallaReservarTurno pantalla) {
+			estados = Database.FetchEstados();
 			tiposRecursoTecnologico = Database.FetchTiposRT();
 			centrosInvestigacion = Database.FetchCentrosInvestigacion();
 			this.pantalla = pantalla;
@@ -74,7 +76,7 @@ namespace DSI2022.Business {
 
 				turnosValidos = OrdernarTurnos(turnosValidos);
 
-				TurnoDisplay[] displays = GetTurnosDisplay(turnosValidos);
+				TurnoDisplay[] displays = GetTurnosDisplay(turnosValidos, seleccionado);
 				TurnoDiaDisplay[] diaTurnos = AgruparPorDia(displays);
 
 				pantalla.SolicitarSeleccionTurno(diaTurnos);
@@ -101,11 +103,11 @@ namespace DSI2022.Business {
 			return turnoDias.ToArray();
 		}
 
-		private TurnoDisplay[] GetTurnosDisplay(Turno[] turnos) {
+		private TurnoDisplay[] GetTurnosDisplay(Turno[] turnos, RecursoTecnologico rt) {
 			List<TurnoDisplay> ret = new List<TurnoDisplay>();
 
 			foreach (Turno turno in turnos) {
-				TurnoDisplay turnoDisplay = new TurnoDisplay(turno);
+				TurnoDisplay turnoDisplay = new TurnoDisplay(turno, rt);
 				ret.Add(turnoDisplay);
 			}
 
@@ -128,6 +130,20 @@ namespace DSI2022.Business {
 
 			//return centroInvestigacion.TrabajaCientifico(logeado) && centroInvestigacion.ContieneRecurso(recurso);
 			return true;
+		}
+
+		internal void ReservarTurno(Turno turno) {
+			Estado reservado = GetEstado("Reservado");
+			turno.Reservar(reservado);
+		}
+
+		private Estado GetEstado(string v) {
+			foreach (Estado estado in estados) {
+				if (estado.GetNombre() == v)
+					return estado;
+			}
+
+			return null;
 		}
 	}
 }

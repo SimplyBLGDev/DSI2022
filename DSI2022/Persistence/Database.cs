@@ -5,12 +5,20 @@ namespace DSI2022.Persistence {
 		private static string repositoryBase = "Repositories";
 		private static string centrosInvestigacionPath = Path.Combine(repositoryBase, "CentrosInvestigacion.json");
 		private static string tiposRecursosTecnologicosPath = Path.Combine(repositoryBase, "TiposRT.json");
+		private static string estadosPath = Path.Combine(repositoryBase, "Estados.json");
 
 		public static TipoRecursoTecnologico[] FetchTiposRT() {
 			Repository<TipoRecursoTecnologico> tipos =
 				new Repository<TipoRecursoTecnologico>(tiposRecursosTecnologicosPath);
 
 			return tipos.ToArray();
+		}
+
+		public static Estado[] FetchEstados() {
+			Repository<Estado> estados =
+				new Repository<Estado>(estadosPath);
+
+			return estados.ToArray();
 		}
 
 		public static CentroInvestigacion[] FetchCentrosInvestigacion() {
