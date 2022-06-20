@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DSI2022.Business {
+﻿namespace DSI2022.Business {
 	public class RecursoTecnologico {
 		private int id;
 		private DateTime fechaAlta;
 		private TipoRecursoTecnologico tipo;
-		private ValorCaracteristicaRT[] valoresCaracteristicas;
 		private List<HistorialEstado> historialEstados;
 		private ModeloRT modelo;
 		private Turno[] turnos;
@@ -17,16 +10,14 @@ namespace DSI2022.Business {
 		public int Id { get => id; set => id = value; }
 		public DateTime FechaAlta { get => fechaAlta; set => fechaAlta = value; }
 		public TipoRecursoTecnologico Tipo { get => tipo; set => tipo = value; }
-		public ValorCaracteristicaRT[] ValoresCaracteristicas { get => valoresCaracteristicas; set => valoresCaracteristicas = value; }
 		public List<HistorialEstado> HistorialEstados { get => historialEstados; set => historialEstados = value; }
 		public ModeloRT Modelo { get => modelo; set => modelo = value; }
 		public Turno[] Turnos { get => turnos; set => turnos = value; }
 
-		public RecursoTecnologico(int id, DateTime fechaAlta, TipoRecursoTecnologico tipo, ValorCaracteristicaRT[] valoresCaracteristicas, List<HistorialEstado> historialEstados, ModeloRT modelo, Turno[] turnos) {
+		public RecursoTecnologico(int id, DateTime fechaAlta, TipoRecursoTecnologico tipo, List<HistorialEstado> historialEstados, ModeloRT modelo, Turno[] turnos) {
 			this.id = id;
 			this.fechaAlta = fechaAlta;
 			this.tipo = tipo;
-			this.valoresCaracteristicas = valoresCaracteristicas;
 			this.historialEstados = historialEstados;
 			this.modelo = modelo;
 			this.turnos = turnos;

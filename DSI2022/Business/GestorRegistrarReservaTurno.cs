@@ -135,6 +135,17 @@ namespace DSI2022.Business {
 		internal void ReservarTurno(Turno turno) {
 			Estado reservado = GetEstado("Reservado");
 			turno.Reservar(reservado);
+
+			EnviarMailNotificacion(turno);
+			FinCU();
+		}
+
+		private void FinCU() {
+			MessageBox.Show("Fin CU");
+		}
+
+		private void EnviarMailNotificacion(Turno turno) {
+			
 		}
 
 		private Estado GetEstado(string v) {

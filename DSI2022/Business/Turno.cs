@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DSI2022.Business {
+﻿namespace DSI2022.Business {
 	public class Turno : IComparable<Turno> {
 		private DateTime fechaInicio;
 		private DateTime fechaFin;
 		private List<HistorialEstado> historialEstados;
+
+		public DateTime FechaInicio { get => fechaInicio; set => fechaInicio = value; }
+		public DateTime FechaFin { get => fechaFin; set => fechaFin = value; }
+		public List<HistorialEstado> HistorialEstados { get => historialEstados; set => historialEstados = value; }
 
 		public Turno(DateTime fechaInicio, DateTime fechaFin, List<HistorialEstado> historialEstados) {
 			this.fechaInicio = fechaInicio;
@@ -31,10 +29,6 @@ namespace DSI2022.Business {
 		internal DateTime GetTo() {
 			return fechaFin;
 		}
-
-		public DateTime FechaInicio { get => fechaInicio; set => fechaInicio = value; }
-		public DateTime FechaFin { get => fechaFin; set => fechaFin = value; }
-		public List<HistorialEstado> HistorialEstados { get => historialEstados; set => historialEstados = value; }
 
 		public int CompareTo(Turno other) {
 			if (other.fechaInicio < fechaInicio)

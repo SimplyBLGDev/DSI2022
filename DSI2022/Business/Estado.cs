@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DSI2022.Business {
+﻿namespace DSI2022.Business {
 	public class Estado {
 		private string nombre;
 
@@ -12,14 +6,12 @@ namespace DSI2022.Business {
 			this.nombre = nombre;
 		}
 
-		public string Nombre { get => nombre; set => nombre = value; }
-
 		internal bool EsActivo() {
-			return Nombre != "DeBajaTecnica" && Nombre != "DeBajaDefinitiva";
+			return nombre != "DeBajaTecnica" && nombre != "DeBajaDefinitiva";
 		}
 
 		internal string GetNombre() {
-			return Nombre;
+			return nombre;
 		}
 	}
 }

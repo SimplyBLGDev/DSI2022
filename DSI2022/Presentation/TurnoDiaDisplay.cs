@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DSI2022.Presentation {
+﻿namespace DSI2022.Presentation {
 	public class TurnoDiaDisplay : List<TurnoDisplay> {
 		public enum TurnoDiaEstado { LIBRE, OCUPADO }
 		public DateOnly dia;

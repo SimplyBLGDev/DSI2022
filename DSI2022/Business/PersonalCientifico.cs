@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DSI2022.Business {
+﻿namespace DSI2022.Business {
 	public class PersonalCientifico {
 		private Usuario usuario;
 		private string legajo;
@@ -14,6 +8,15 @@ namespace DSI2022.Business {
 		private string eMailInstitucional;
 		private string eMailPersonal;
 		private string telefonoCelular;
+
+		public Usuario Usuario { get => usuario; set => usuario = value; }
+		public string Legajo { get => legajo; set => legajo = value; }
+		public string Nombre { get => nombre; set => nombre = value; }
+		public string Apellido { get => apellido; set => apellido = value; }
+		public int NumeroDNI { get => numeroDNI; set => numeroDNI = value; }
+		public string EMailInstitucional { get => eMailInstitucional; set => eMailInstitucional = value; }
+		public string EMailPersonal { get => eMailPersonal; set => eMailPersonal = value; }
+		public string TelefonoCelular { get => telefonoCelular; set => telefonoCelular = value; }
 
 		public PersonalCientifico(Usuario usuario, string legajo, string nombre, string apellido, int numeroDNI, string eMailInstitucional, string eMailPersonal, string telefonoCelular) {
 			this.usuario = usuario;
@@ -25,15 +28,6 @@ namespace DSI2022.Business {
 			this.eMailPersonal = eMailPersonal;
 			this.telefonoCelular = telefonoCelular;
 		}
-
-		public Usuario Usuario { get => usuario; set => usuario = value; }
-		public string Legajo { get => legajo; set => legajo = value; }
-		public string Nombre { get => nombre; set => nombre = value; }
-		public string Apellido { get => apellido; set => apellido = value; }
-		public int NumeroDNI { get => numeroDNI; set => numeroDNI = value; }
-		public string EMailInstitucional { get => eMailInstitucional; set => eMailInstitucional = value; }
-		public string EMailPersonal { get => eMailPersonal; set => eMailPersonal = value; }
-		public string TelefonoCelular { get => telefonoCelular; set => telefonoCelular = value; }
 
 		internal bool EsCientifico(PersonalCientifico logeado) {
 			return logeado.legajo == this.legajo;
