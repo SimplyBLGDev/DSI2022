@@ -17,8 +17,8 @@ namespace DSI2022 {
 					"Alberto",
 					"Johnson",
 					425645786,
-					"@ss",
-					"@aa",
+					"email@institucional.edu",
+					"email@personal.com",
 					"+54 90453153"
 				),
 				DateTime.Now,

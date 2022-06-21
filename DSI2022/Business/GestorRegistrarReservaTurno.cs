@@ -21,11 +21,7 @@ namespace DSI2022.Business {
 			pantalla.SolicitarTipoRT(tiposDisponibles);
 		}
 
-		private TipoRecursoTecnologico[] GetTiposRT() {
-			return tiposRecursoTecnologico;
-		}
-
-		internal void SeleccionarTipoRT(TipoRecursoTecnologico seleccionado) {
+		public void SeleccionarTipoRT(TipoRecursoTecnologico seleccionado) {
 			List<CentroInvestigacionDisplay> cIDisplay = new List<CentroInvestigacionDisplay>();
 
 			foreach (CentroInvestigacion centroInvestigacion in centrosInvestigacion) {
@@ -35,6 +31,32 @@ namespace DSI2022.Business {
 			}
 
 			pantalla.SolicitarSeleccionRT(cIDisplay);
+		}
+
+		public void SeleccionarRecursoTecnologico(CentroInvestigacion cISeleccionado, RecursoTecnologico seleccionado) {
+			if (VerificarPerteneceAlLogeado(cISeleccionado, seleccionado)) {
+				Turno[] turnosValidos = seleccionado.GetTurnos(GetFechaHoraActual());
+
+				turnosValidos = OrdernarTurnos(turnosValidos);
+
+				TurnoDisplay[] displays = GetTurnosDisplay(turnosValidos, seleccionado);
+				TurnoDiaDisplay[] diaTurnos = AgruparPorDia(displays);
+
+				pantalla.SolicitarSeleccionTurno(diaTurnos);
+			}
+		}
+
+		public void ReservarTurno(Turno turno) {
+			Estado reservado = GetEstado("Reservado");
+			turno.Reservar(reservado);
+
+			string eMail = SessionManager.GetCientifico().GetEmail();
+			EnviarMailNotificacion(turno, eMail);
+			FinCU();
+		}
+
+		private TipoRecursoTecnologico[] GetTiposRT() {
+			return tiposRecursoTecnologico;
 		}
 
 		private CentroInvestigacionDisplay GenerarCIDisplay(CentroInvestigacion centroInvestigacion, RecursoTecnologico[] rTSinBaja) {
@@ -68,19 +90,6 @@ namespace DSI2022.Business {
 			encontrados.AddRange(centroInvestigacion.BuscarRTDeTipo(tipo));
 
 			return encontrados.ToArray();
-		}
-
-		internal void SeleccionarRecursoTecnologico(CentroInvestigacion cISeleccionado, RecursoTecnologico seleccionado) {
-			if (VerificarPerteneceAlLogeado(cISeleccionado, seleccionado)) {
-				Turno[] turnosValidos = seleccionado.GetTurnos(GetFechaHoraActual());
-
-				turnosValidos = OrdernarTurnos(turnosValidos);
-
-				TurnoDisplay[] displays = GetTurnosDisplay(turnosValidos, seleccionado);
-				TurnoDiaDisplay[] diaTurnos = AgruparPorDia(displays);
-
-				pantalla.SolicitarSeleccionTurno(diaTurnos);
-			}
 		}
 
 		private TurnoDiaDisplay[] AgruparPorDia(TurnoDisplay[] turnos) {
@@ -125,6 +134,15 @@ namespace DSI2022.Business {
 			return DateTime.Now;
 		}
 
+		private Estado GetEstado(string nombre) {
+			foreach (Estado estado in estados) {
+				if (estado.GetNombre() == nombre)
+					return estado;
+			}
+
+			return null;
+		}
+
 		private bool VerificarPerteneceAlLogeado(CentroInvestigacion centroInvestigacion, RecursoTecnologico recurso) {
 			PersonalCientifico logeado = SessionManager.GetCientifico();
 
@@ -132,29 +150,12 @@ namespace DSI2022.Business {
 			return true;
 		}
 
-		internal void ReservarTurno(Turno turno) {
-			Estado reservado = GetEstado("Reservado");
-			turno.Reservar(reservado);
-
-			EnviarMailNotificacion(turno);
-			FinCU();
+		private void EnviarMailNotificacion(Turno turno, string direccion) {
+			MessageBox.Show("Enviar email a " + direccion + ".");
 		}
 
 		private void FinCU() {
 			MessageBox.Show("Fin CU");
-		}
-
-		private void EnviarMailNotificacion(Turno turno) {
-			
-		}
-
-		private Estado GetEstado(string v) {
-			foreach (Estado estado in estados) {
-				if (estado.GetNombre() == v)
-					return estado;
-			}
-
-			return null;
 		}
 	}
 }

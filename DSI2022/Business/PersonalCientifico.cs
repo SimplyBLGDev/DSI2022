@@ -32,5 +32,9 @@
 		internal bool EsCientifico(PersonalCientifico logeado) {
 			return logeado.legajo == this.legajo;
 		}
+
+		internal string GetEmail() {
+			return this.eMailPersonal;
+		}
 	}
 }
